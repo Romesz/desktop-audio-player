@@ -1,11 +1,15 @@
-/* global console, window, require */
+/* global angular, console, window, require */
 
-window.onload = function () {
-  var ipc = require('ipc');
+window.ipc = require('ipc');
 
-  ipc.on('getPlayList', function(playList) {
-    console.log(playList);
-    // TODO: Front end side of the app
+var app = angular.module('andioPlayer', []);
+
+app.controller('andioPlayerCtrl', function($scope, $window) {
+  $scope.playList = [];
+
+  $window.ipc.on('getPlayList', function(playList) {
+    $scope.playList = playList;
+    $scope.$apply();
   });
-  ipc.send('isServerLive');
-};
+  $window.ipc.send('isServerLive');
+});
