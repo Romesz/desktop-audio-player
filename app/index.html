@@ -3,11 +3,16 @@
 <head>
   <title>Audio Player</title>
 </head>
-<body>
+<body ng-app="andioPlayer" ng-controller="andioPlayerCtrl">
   <div>
     <audio src="music/Avicii%20-%20Waiting%20For%20Love.mp3" controls></audio>
   </div>
 
+  <div ng-repeat="music in playList">
+    {{music}}
+  </div>
+
+  <script src="lib/angular.min.js"></script>
   <script src="js/index.js"></script>
 </body>
 </html>
