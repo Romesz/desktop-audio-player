@@ -1,14 +1,33 @@
+html, body {
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+}
+
 /* index.html */
 
 .hidden {
   display: none;
 }
-  .playing {
-    border: 1px solid red;
+  #playListContainer {
+    display: flex;
   }
+    #music {
+      display: flex;
+    }
+      .playing {
+        background-image: url('../img/play.svg');
+        background-repeat:no-repeat;
+        width: 20px;
+        margin-left: 10px;
+      }
+      #delete {
+        height: 10px;
+        width: 12px;
+        margin-left: 10px;
+      }
 
 /* upload.html */
 
 input {
   display: block;
+  margin-bottom: 5px;
 }

@@ -10,11 +10,12 @@
       <audio src="" controls id="audio"></audio>
     </div>
 
-    <div ng-repeat="music in playList">
-      <div ng-click="changeAudioSource($index, music)" ng-class="{playing: $index === index && audioContainer.paused !== true }">
-        {{music.replace('.mp3', '')}}
+    <div id="playListContainer" ng-repeat="music in playList">
+      <div id="music" ng-click="changeAudioSource($index, music)">
+        <div>{{music.replace('.mp3', '')}}</div>
+        <div ng-class="{playing: $index === index && audioContainer.paused !== true }"></div>
       </div>
-      <span ng-if="audioContainer.paused === true" ng-click="delMusic($index)">del</span>
+      <div id="delete" ng-if="audioContainer.paused === true" ng-click="delMusic($index)" ng-include="'./img/delete.svg'">del</div>
     </div>
   </div>
   <div ng-if="noAudioFound === true">
