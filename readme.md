@@ -2,8 +2,6 @@
 
 desktop-audio-player written in js with Electron
 
-In Progress
-
 ### installation
 
 npm install
@@ -27,6 +25,4 @@ With the current setup Electron Packager only build for Windows x64
 
 ### TODO
 
-*Finish front end side of the app
-
-*Develop upload phase where users can upload musics to playlist and delete from playlist
+*create design

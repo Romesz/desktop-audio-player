@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Audio Player</title>  <link href="css/stlye.css" rel="stylesheet">
+</head>
+<body ng-app="andioPlayer" ng-controller="UploadCtrl">
+  <div>
+    <form ng-submit="uploadMusic($event)">
+      <input id="file" type="file" accept="audio/*">
+      <input type="submit">
+    </form>
+  </div>
+
+  <div>{{musicUploaded}}</div>
+
+  <script src="lib/angular.min.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>

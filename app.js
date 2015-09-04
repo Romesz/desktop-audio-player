@@ -3,18 +3,21 @@
 var app = require('app');
 var menu = require('menu');
 var BrowserWindow = require('browser-window');
-var ipcGetPlayList = require('./ipcGetPlayList').getPlayList;
+var ipcGetPlayList = require('./ipcHelpers').getPlayList;
+var delMusic = require('./ipcHelpers').delMusic;
+var uploadMusic = require('./ipcHelpers').uploadMusic;
 
 var mainWindow = null;
 
 app.on('ready', function() {
   mainWindow = new BrowserWindow({
-    height: 300,
-    width: 500
+    height: 500,
+    width: 1200
   });
 
   mainWindow.loadUrl('file://' + __dirname + '/app/index.html');
   ipcGetPlayList();
+  delMusic();
 
   menu.setApplicationMenu(menu.buildFromTemplate([
     {
@@ -23,13 +26,22 @@ app.on('ready', function() {
       label: 'Developer Tools',
       click: function() {
         mainWindow.openDevTools();
-      }
+      },
+      accelerator: 'CmdOrCtrl+d',
     },
     {
-      label: 'Main Menu',
+      label: 'Audio Player',
       click: function() {
         mainWindow.loadUrl('file://' + __dirname + '/app/index.html');
         ipcGetPlayList();
+        delMusic();
+      }
+    },
+    {
+      label: 'Upload',
+      click: function() {
+        mainWindow.loadUrl('file://' + __dirname + '/app/upload.html');
+        uploadMusic();
       }
     },
     {
