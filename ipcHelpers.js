@@ -28,7 +28,8 @@ exports.delMusic = function() {
 };
 
 exports.uploadMusic = function() {
-  ipc.on('uploadMusic', function(event, name, base64string) {
+  var musics = [];
+  ipc.on('uploadMusic', function(event, name, base64string, lastMusicNum) {
     if(name !== undefined && name.indexOf('.mp3') > -1) {
       base64string = base64string.replace('data:audio/mp3;base64,', '');
       var content = new Buffer(base64string, 'base64');
@@ -36,7 +37,12 @@ exports.uploadMusic = function() {
       fs.writeFile(__dirname + '/app/music/' + name, content, function(err) {
         if(err) console.log(err);
 
-        event.sender.send('musicUploaded', name);
+        musics.push(name);
+        event.sender.send('musicUploaded', musics);
+
+        if(musics.length >= lastMusicNum) {
+          musics = [];
+        } // needs to make empty this global variable
       });
     }
   });

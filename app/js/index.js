@@ -101,15 +101,20 @@ app.controller('UploadCtrl', function($scope, $window) {
   $scope.uploadMusic = function(e) {
     e.preventDefault();
 
-    var file = angular.element(document.querySelector('#file'))[0].files;
-    if(file.length === 0)
+    var files = angular.element(document.querySelector('#file'))[0].files;
+    if(files.length === 0)
       return;
 
-    var reader = new FileReader();
-    reader.onload = (function(e) {
-      $window.ipc.send('uploadMusic', file[0].name, e.target.result);
-    });
-    reader.readAsDataURL(file[0]);
+    for(var i = 0 ; i < files.length ; i++) {
+      (function(file) {
+        var name = file.name;
+        var reader = new FileReader();
+        reader.onload = (function(e) {
+          $window.ipc.send('uploadMusic', name, e.target.result, files.length);
+        });
+        reader.readAsDataURL(file);
+      })(files[i]); // needs an IIFE function inside the for loop
+    }
   };
 
   $window.ipc.on('musicUploaded', function(name) {

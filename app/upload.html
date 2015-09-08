@@ -6,12 +6,14 @@
 <body ng-app="andioPlayer" ng-controller="UploadCtrl">
   <div>
     <form ng-submit="uploadMusic($event)">
-      <input id="file" type="file" accept="audio/*">
+      <input id="file" type="file" accept="audio/*" multiple="multiple">
       <input type="submit">
     </form>
   </div>
 
-  <div>{{musicUploaded}}</div>
+  <div ng-repeat="m in musicUploaded">
+    <p>{{m}}</p>
+  </div>
 
   <script src="lib/angular.min.js"></script>
   <script src="js/index.js"></script>
